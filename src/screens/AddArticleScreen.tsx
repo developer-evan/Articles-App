@@ -19,10 +19,9 @@ const AddArticleScreen = () => {
         userId,
       };
 
-      // Update articlesData directly
+      
       articlesData.push(newArticle);
 
-      // Optionally, you can also store it in AsyncStorage
       await AsyncStorage.setItem('articles', JSON.stringify(articlesData));
 
       setTitle('');

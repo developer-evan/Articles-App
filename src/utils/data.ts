@@ -57,7 +57,7 @@ export const categoriesData: Category[] = [
     },
 ];
 
-export const usersData = [
+export const usersData: User[]= [
     {
         id: '123',
         username: 'johndoe1987',
