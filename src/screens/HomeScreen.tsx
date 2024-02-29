@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { articlesData, usersData } from '../utils/data';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { Article } from '../utils/types'; 
 import { fetchUser } from '../utils';
+import { Entypo } from '@expo/vector-icons';
+
+
 
 const HomeScreen = ({ navigation }: any) => {  
 
@@ -36,12 +39,15 @@ const HomeScreen = ({ navigation }: any) => {
         renderItem={renderArticle}
         keyExtractor={(item) => item.id}
       />
-      <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddArticle')}>
+        <Entypo name="plus" size={45} color="white" />
+      </TouchableOpacity>
+      {/* <View style={styles.buttonContainer}>
         <Button
           title="Add Article"
           onPress={() => navigation.navigate('AddArticle')}
         />
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -65,6 +71,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+  button: {
+    position: 'absolute',
+    bottom: 60,
+    right: 20, // Adjusted the position of the button
+    backgroundColor: '#0F172A',
+    borderRadius: 50,
+    padding: 10,
+    elevation: 7,
   },
 });
 

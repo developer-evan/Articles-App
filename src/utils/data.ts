@@ -47,17 +47,17 @@ export const categoriesData: Category[] = [
 export const usersData: User[]= [
     {
         id: '123',
-        username: 'johndoe1987',
+        username: 'oliverjam',
         password: '$tr0ngP@ssw0rd!',
     },
     {
         id: '456',
-        username: 'janedoe1990',
+        username: 'evantommy',
         password: 'SecureP@ss123!',
     },
     {
         id: '789',
-        username: 'alexsmith1975',
+        username: 'alexoyoo',
         password: 'Pr0tect1on@!%',
     },
     {

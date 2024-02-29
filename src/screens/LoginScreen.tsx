@@ -51,7 +51,7 @@ const LoginScreen: React.FC = ({}) => {
         </Text>
         <View style={styles.inputContainer}>
           <View style={styles.iconContainer}>
-            <Ionicons name="person" size={18} color="#00B5E2" />
+            <Ionicons name="person" size={18} color="#0F172A" />
           </View>
           <TextInput
             style={styles.input}
@@ -62,7 +62,7 @@ const LoginScreen: React.FC = ({}) => {
         </View>
         <View style={styles.passwordContainer}>
           <View style={styles.iconContainer}>
-            <Ionicons name="lock-closed" size={18} color="#00B5E2" />
+            <Ionicons name="lock-closed" size={18} color="#0F172A" />
           </View>
           <TextInput
             style={styles.passwordInput}
@@ -78,7 +78,7 @@ const LoginScreen: React.FC = ({}) => {
             <Ionicons
               name={showPassword ? "eye-off" : "eye"}
               size={18}
-              color="#00B5E2"
+              color="#0F172A"
             />
           </TouchableOpacity>
         </View>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    color: "#00B5E2",
+    color: "#0F172A",
     marginBottom: 20,
   },
   inputContainer: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderBottomWidth: 1,
-    borderBottomColor: "#00B5E2",
+    borderBottomColor: "#0F172A",
   },
   iconContainer: {
     padding: 10,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderBottomWidth: 1,
-    borderBottomColor: "#00B5E2",
+    borderBottomColor: "#0F172A",
   },
   passwordInput: {
     flex: 1,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   button: {
     height: 50,
     width: 300,
-    backgroundColor: "#00B5E2",
+    backgroundColor: "#0F172A",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
