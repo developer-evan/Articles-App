@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -6,17 +6,17 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
-} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { articlesData, categoriesData } from '../utils/data';
-import { useNavigation } from '@react-navigation/native'; 
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { articlesData, categoriesData } from "../utils/data";
+import { useNavigation } from "@react-navigation/native";
 
 const AddArticleScreen = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
-  const navigation = useNavigation(); 
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
+  const navigation = useNavigation();
 
   const handleCreateArticle = async () => {
     try {
@@ -29,18 +29,18 @@ const AddArticleScreen = () => {
         title,
         content,
         category,
-        userId: '', 
+        userId: "",
       };
 
       articlesData.push(newArticle);
-      await AsyncStorage.setItem('articles', JSON.stringify(articlesData));
+      await AsyncStorage.setItem("articles", JSON.stringify(articlesData));
 
-      setTitle('');
-      setContent('');
-      setCategory('');
+      setTitle("");
+      setContent("");
+      setCategory("");
 
-      // Navigate to home screen after creating the article
-      navigation.navigate('Home');
+     
+      navigation.navigate("Home");
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +48,7 @@ const AddArticleScreen = () => {
 
   const validateFields = () => {
     if (!title.trim() || !content.trim() || !category.trim()) {
-      Alert.alert('Error', 'All fields are required');
+      Alert.alert("Error", "All fields are required");
       return false;
     }
     return true;
@@ -81,7 +81,9 @@ const AddArticleScreen = () => {
       </Picker>
 
       <TouchableOpacity style={styles.button} onPress={handleCreateArticle}>
-        <Text style={{ color: 'white', textAlign: 'center' }}>Create Article</Text>
+        <Text style={{ color: "white", textAlign: "center" }}>
+          Create Article
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -90,29 +92,29 @@ const AddArticleScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   input: {
-    width: '100%',
+    width: "100%",
     padding: 10,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
   },
   picker: {
-    width: '100%',
+    width: "100%",
     padding: 10,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
   },
   button: {
-    width: '100%',
-    backgroundColor: '#0F172A',
+    width: "100%",
+    backgroundColor: "#0F172A",
     padding: 15,
     borderRadius: 5,
   },

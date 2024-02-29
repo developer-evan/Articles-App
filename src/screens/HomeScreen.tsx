@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { articlesData, usersData } from '../utils/data';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { Article } from '../utils/types'; 
-import { fetchUser } from '../utils';
-import { Entypo } from '@expo/vector-icons';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+} from "react-native";
+import { articlesData, usersData } from "../utils/data";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { fetchUser } from "../utils";
+import { Entypo } from "@expo/vector-icons";
 
-
-const HomeScreen = ({ navigation }: any) => {  
-
+const HomeScreen = ({ navigation }: any) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
@@ -20,15 +24,14 @@ const HomeScreen = ({ navigation }: any) => {
     <View style={styles.articleContainer}>
       <Text style={styles.title}>{item.title}</Text>
       <Text
-      style={
-        {
-          color: 'gray',
+        style={{
+          color: "gray",
           marginBottom: 5,
-        }
-      }
-      >Category: {item.category}</Text>
+        }}
+      >
+        Category: {item.category}
+      </Text>
       <Text>{item.content}</Text>
-      
     </View>
   );
 
@@ -39,15 +42,13 @@ const HomeScreen = ({ navigation }: any) => {
         renderItem={renderArticle}
         keyExtractor={(item) => item.id}
       />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddArticle')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("AddArticle")}
+      >
         <Entypo name="plus" size={35} color="white" />
       </TouchableOpacity>
-      {/* <View style={styles.buttonContainer}>
-        <Button
-          title="Add Article"
-          onPress={() => navigation.navigate('AddArticle')}
-        />
-      </View> */}
+     
     </View>
   );
 };
@@ -59,13 +60,13 @@ const styles = StyleSheet.create({
   },
   articleContainer: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 18,
     marginBottom: 5,
   },
@@ -73,10 +74,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 60,
-    right: 20, // Adjusted the position of the button
-    backgroundColor: '#0F172A',
+    right: 20,
+    backgroundColor: "#0F172A",
     borderRadius: 50,
     padding: 10,
     elevation: 7,
