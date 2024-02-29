@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
-import { articlesData } from '../utils/data';
+import { articlesData, usersData } from '../utils/data';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { Article } from '../utils/types'; 
+import { fetchUser } from '../utils';
 
 const HomeScreen = ({ navigation }: any) => {  
 
- 
-
   const [articles, setArticles] = useState<Article[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    fetchUser({ setUser });
+  }, []);
 
-  const renderArticle = ({ item }: { item: Article }) => ( 
+  const renderArticle = ({ item }: { item: Article }) => (
     <View style={styles.articleContainer}>
       <Text style={styles.title}>{item.title}</Text>
       <Text>{item.content}</Text>
@@ -20,7 +24,7 @@ const HomeScreen = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={articles}
+        data={articlesData}
         renderItem={renderArticle}
         keyExtractor={(item) => item.id}
       />

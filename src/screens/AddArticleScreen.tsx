@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { articlesData } from '../utils/data';
+import { articlesData, usersData } from '../utils/data';
+import { fetchUser } from '../utils';
 
 const AddArticleScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const [user, setUser] = useState<User | null>(null);
 
+  useEffect(() => {
+    fetchUser({ setUser });
+  }, []) 
   const handleCreateArticle = async () => {
     try {
-      const userId = '123';      
-      const newArticle = {
-        id: Math.random().toString(),
-        title,
-        content,
-        category,
-        userId,
-      };
+      if (user) {
+        const userId = user?.id;
+        const newArticle = {
+          id: Math.random().toString(),
+          title,
+          content,
+          category,
+          userId,
+        };
+        console.log(newArticle, 'newArticle');
 
-      
-      articlesData.push(newArticle);
+        articlesData.push(newArticle);
 
-      await AsyncStorage.setItem('articles', JSON.stringify(articlesData));
+        await AsyncStorage.setItem('articles', JSON.stringify(articlesData));
+      }
 
       setTitle('');
       setContent('');

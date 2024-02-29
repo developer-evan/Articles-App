@@ -11,16 +11,33 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usersData } from "../utils/data";
 
-interface LoginScreenProps {
-  handleLogin: (username: string, password: string, navigation: any) => void;
-}
+// interface LoginScreenProps {
+//   handleLogin: (username: string, password: string, navigation: any) => void;
+// }
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ handleLogin }) => {
+const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
+  const handleLogin = async (username: string, password: string, navigation: any) => {
+    const foundUser = usersData.find(
+      (user: User) => user.username === username && user.password === password
+    );
+
+
+    if (foundUser) {
+      // AsyncStorage.setItem("user", JSON.stringify(foundUser));
+      await AsyncStorage.setItem('user', JSON.stringify(foundUser));
+      console.log(foundUser, "foundUser");
+      alert("Login successful");
+      navigation.navigate("Home");
+    } else {
+      alert("Invalid username or password");
+    }
+  };
 
   const onLoginPress = () => {
     handleLogin(username, password, navigation);

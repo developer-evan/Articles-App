@@ -73,6 +73,12 @@ export const usersData: User[]= [
         username: 'alexsmith1975',
         password: 'Pr0tect1on@!%',
     },
+    {
+        id: '101',
+        username: 'abdiaziz',
+        password: '123456',
+        
+    }
 ];
 
 

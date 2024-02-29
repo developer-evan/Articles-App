@@ -1,44 +1,69 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./src/screens/HomeScreen";
 import LoginScreen from "./src/screens/LoginScreen";
-import AddArticleScreen from "./src/screens/AddArticleScreen";
+import { Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  const handleLogin = (username: string, password: string, navigation: any) => {
-    // Hardcoded example login
-    const exampleUsername = "user123";
-    const examplePassword = "pass123";
+const App = () => {
+  useEffect(() => {
+    checkToken();
+  }, []);
 
-    if (username === exampleUsername && password === examplePassword) {
-      // Here you can handle the login success logic, such as storing the authentication token
-      // console.log("Login successful");
-      alert("Login successful");
-      // For example, you might want to navigate to the Home screen upon successful login
-      navigation.navigate("Home");
-    } else {
-      // console.log("Invalid username or password");
-      alert("Invalid username or password");
-      // Here you can handle the login failure logic, such as showing an error message
+  const checkToken = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const expiryTime = await AsyncStorage.getItem("expiryTime");
+    if (token && expiryTime) {
+      const currentTime = Date.now();
+      if (currentTime < parseInt(expiryTime)) {
+        // Token is valid, navigate to Home
+        return;
+      } else {
+        // Token expired, clear token and navigate to Login
+        await AsyncStorage.removeItem("token");
+        await AsyncStorage.removeItem("expiryTime");
+        await AsyncStorage.removeItem("user");
+      }
     }
+    // No token found, navigate to Login
   };
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login">
-          {(props) => <LoginScreen {...props} handleLogin={handleLogin} />}
+        <Stack.Screen name="Login" options={{ headerShown: false }}>
+          {(props) => <LoginScreen />}
         </Stack.Screen>
         <Stack.Screen
-        options={{ headerShown: false }}
-         name="Home"
-          component={HomeScreen} />
-        <Stack.Screen name="AddArticle" component={AddArticleScreen} />
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => <Text style={{ color: "white" }}>Home</Text>,
+            headerTitleAlign: "left",
+            headerStyle: {
+              backgroundColor: "#0F172A",
+            },
+            headerTintColor: "white",
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {}}
+                style={{ marginLeft: 15 }}
+              ></TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity onPress={() => {}} style={{ marginRight: 15 }}>
+                <Ionicons name="log-out-outline" size={24} color="white" />
+              </TouchableOpacity>
+            ),
+          }}
+        />
       </Stack.Navigator>
-      
     </NavigationContainer>
   );
-}
+};
+
+export default App;
