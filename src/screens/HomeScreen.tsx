@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }: any) => {
         keyExtractor={(item) => item.id}
       />
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddArticle')}>
-        <Entypo name="plus" size={45} color="white" />
+        <Entypo name="plus" size={35} color="white" />
       </TouchableOpacity>
       {/* <View style={styles.buttonContainer}>
         <Button
