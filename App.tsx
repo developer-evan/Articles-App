@@ -6,6 +6,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import { Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AddArticleScreen from "./src/screens/AddArticleScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,16 +21,16 @@ const App = () => {
     if (token && expiryTime) {
       const currentTime = Date.now();
       if (currentTime < parseInt(expiryTime)) {
-        // Token is valid, navigate to Home
+       
         return;
       } else {
-        // Token expired, clear token and navigate to Login
+        
         await AsyncStorage.removeItem("token");
         await AsyncStorage.removeItem("expiryTime");
         await AsyncStorage.removeItem("user");
       }
     }
-    // No token found, navigate to Login
+    
   };
 
   return (
@@ -60,6 +61,15 @@ const App = () => {
               </TouchableOpacity>
             ),
           }}
+        />
+        <Stack.Screen name="AddArticle" component={AddArticleScreen} 
+        options={{
+          headerTitle: () => <Text style={{ color: "black" }}>Add Article</Text>,
+        }
+        
+          }       
+
+        
         />
       </Stack.Navigator>
     </NavigationContainer>

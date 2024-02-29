@@ -16,8 +16,16 @@ const HomeScreen = ({ navigation }: any) => {
   const renderArticle = ({ item }: { item: Article }) => (
     <View style={styles.articleContainer}>
       <Text style={styles.title}>{item.title}</Text>
+      <Text
+      style={
+        {
+          color: 'gray',
+          marginBottom: 5,
+        }
+      }
+      >Category: {item.category}</Text>
       <Text>{item.content}</Text>
-      <Text>Category: {item.category}</Text>
+      
     </View>
   );
 

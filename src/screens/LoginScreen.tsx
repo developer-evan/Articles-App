@@ -10,37 +10,36 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { usersData } from "../utils/data";
 
-// interface LoginScreenProps {
-//   handleLogin: (username: string, password: string, navigation: any) => void;
-// }
-
-const LoginScreen: React.FC = () => {
+const LoginScreen: React.FC = ({}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
-  const handleLogin = async (username: string, password: string, navigation: any) => {
+
+  const handleLogin = async (username: string, password: string) => {
     const foundUser = usersData.find(
       (user: User) => user.username === username && user.password === password
     );
 
-
     if (foundUser) {
-      // AsyncStorage.setItem("user", JSON.stringify(foundUser));
-      await AsyncStorage.setItem('user', JSON.stringify(foundUser));
-      console.log(foundUser, "foundUser");
+      const token = Math.random().toString(36).substring(7);
+      const expiryTime = Date.now() + 3600 * 1000; 
+      await AsyncStorage.setItem("token", token);
+      await AsyncStorage.setItem("expiryTime", expiryTime.toString());
+      await AsyncStorage.setItem("user", JSON.stringify(foundUser));
+      
       alert("Login successful");
-      navigation.navigate("Home");
+      navigation.navigate("Home"); 
     } else {
       alert("Invalid username or password");
     }
   };
 
   const onLoginPress = () => {
-    handleLogin(username, password, navigation);
+    handleLogin(username, password);
   };
 
   return (
@@ -90,6 +89,9 @@ const LoginScreen: React.FC = () => {
     </View>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

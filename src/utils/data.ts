@@ -25,21 +25,8 @@ export const articlesData: Article[] = [
         content: 'Artificial Intelligence (AI) is revolutionizing healthcare with its ability to analyze complex medical data...',
         category: 'Technology',
         userId: '123',
-    },
-    {
-        id: '2',
-        title: 'Self-Driving Cars: A Look into the Future of Transportation',
-        content: 'Autonomous vehicles promise to change how we travel, with companies like Tesla and Waymo leading the way...',
-        category: 'Technology',
-        userId: '456',
-    },
-    {
-        id: '3',
-        title: 'The Latest Advancements in Quantum Computing',
-        content: 'Quantum computing is making strides with new breakthroughs, such as Google\'s recent achievement of quantum supremacy...',
-        category: 'Technology',
-        userId: '123',
-    },
+    }
+ 
 ];
 
 export const categoriesData: Category[] = [
