@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Text, FlatList, StyleSheet, Button } from 'react-native';
+import { articlesData } from '../utils/data';
+// import { Article } from '../utils/types'; 
 
-const HomeScreen = () => {
-  const [articles, setArticles] = useState([]);
+const HomeScreen = ({ navigation }: any) => {  
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        const storedArticles = await AsyncStorage.getItem('articles');
-        if (storedArticles) {
-          setArticles(JSON.parse(storedArticles));
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+ 
 
-    fetchArticles();
-  }, []);
+  const [articles, setArticles] = useState<Article[]>([]);
 
-  const renderArticle = ({ item }: { item: any }) => (
+  const renderArticle = ({ item }: { item: Article }) => ( 
     <View style={styles.articleContainer}>
       <Text style={styles.title}>{item.title}</Text>
       <Text>{item.content}</Text>
@@ -35,6 +24,12 @@ const HomeScreen = () => {
         renderItem={renderArticle}
         keyExtractor={(item) => item.id}
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Add Article"
+          onPress={() => navigation.navigate('AddArticle')}
+        />
+      </View>
     </View>
   );
 };
@@ -55,6 +50,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 5,
+  },
+  buttonContainer: {
+    marginTop: 20,
   },
 });
 
