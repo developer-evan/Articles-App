@@ -43,11 +43,11 @@ const App = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            headerTitle: () => <Text style={{ color: "white" }}>Home</Text>,
+            headerTitle: () => <Text style={{ color: "#0F172A" }}>Home</Text>,
             headerTitleAlign: "left",
-            headerStyle: {
-              backgroundColor: "#0F172A",
-            },
+            // headerStyle: {
+            //   backgroundColor: "#0F172A",
+            // },
             headerTintColor: "white",
             headerLeft: () => (
               <TouchableOpacity
@@ -57,7 +57,7 @@ const App = () => {
             ),
             headerRight: () => (
               <TouchableOpacity onPress={() => {}} style={{ marginRight: 15 }}>
-                <Ionicons name="log-out-outline" size={24} color="white" />
+                <Ionicons name="log-out-outline" size={24} color="#0F172A" />
               </TouchableOpacity>
             ),
           }}
